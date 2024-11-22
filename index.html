@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: blue;
+        }
+        .wrapper{
+            width: 50%;
+            margin: auto;
+            /* background-color: grey; */
+            text-align: center;
+            margin-top: 100px;
+        }
+        input{
+            width: 300px;
+            height: 50px;
+            font-size: 32px;
+            background-color: red;
+        }
+        .inputbox{
+            background-color: rgb(11, 2, 94);
+        }
+        #button{
+            width: 200px;
+            height: 30px;
+            background-color: rgb(226, 212, 19);
+        }
+        .output{
+            text-align: center;
+            background-color: rgb(187, 179, 137);
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="inputbox">
+    <input id="userinput" type="text" placeholder="enter your city">
+    <button id="button">Check Weather</button>
+        </div>
+
+        <div class="output">
+        
+        </div>
+    </div>
+    <script>
+        var userInput = document.querySelector("#userinput")
+        var btn = document.querySelector("#button")
+        var output = document.querySelector(".output")
+
+        btn.addEventListener("click", ()=>{
+            console.log(userInput.value);
+            
+
+            fetch(`https://api.weatherapi.com/v1/current.json?key=cd4e06ae482b4544add15909241911&q=${userInput.value}&aqi=no`)
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            
+            output.innerHTML = `
+            <h1>Country : ${res.location.country}</h1>
+            <h1>Location : ${res.location.name}</h1>
+            <h2>temperature : ${res.current.temp_c}°C</h2>
+            <h2>humidity : ${res.current.humidity}°C</h2>
+            <h2>Wind Speed : ${res.current.wind_kph}kph</h2>
+
+            `
+        })
+        })
+        
+
+        
+
+
+
+
+    </script>
+</body>
+</html>
